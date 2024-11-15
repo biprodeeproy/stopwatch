@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="cont">
+    <div class="timer">
+      <span id="hour">00</span>
+      <span>:</span>
+      <span id="minute">00</span>
+      <span>:</span>
+      <span id="second">00</span>
+    </div>
+    <div class="cont2">
+      <button type="submit" id="start" onclick="startimer()">start</button>
+      <button type="submit" id="stop" onclick="stoptimer()">stop</button>
+      <button type="submit" id="reset" onclick="resettimer()">reset</button>
+    </div>
+  </div>
+</body>
+<script>
+  let hour = document.getElementById('hour');
+  let minute = document.getElementById('minute');
+  let second = document.getElementById('second');
+  let hr = 0;
+  let min = 0;
+  let sec = 0;
+  let settimer = false;
+  let startimer = () => {
+    settimer = true;
+    timecycle();
+  }
+  let timecycle = () => {
+    hr = parseInt(hr);
+    min = parseInt(min);
+    sec = parseInt(sec);
+    if (settimer == true) {
+      sec = sec + 1;
+      if (sec == 60) {
+        min = min + 1;
+        sec = 0;
+      }
+      if (min == 60) {
+        hr = hr + 1;
+        min = 0;
+        sec = 0;
+      }
+      if (sec < 10) {
+        sec = '0' + sec;
+      }
+      if (min < 10) {
+        min = '0' + min;
+      }
+      if (hr < 10) {
+        hr = '0' + hr;
+      }
+      hour.innerHTML = hr;
+      minute.innerHTML = min;
+      second.innerHTML = sec;
+      setTimeout(timecycle, 1000);
+    }
+  }
+  let stoptimer = () => {
+    if (settimer == true) {
+      settimer = false;
+    }
+  }
+  let resettimer = () => {
+    settimer = false;
+    hr = 0;
+    min = 0;
+    sec = 0;
+    hour.innerHTML = '00';
+    minute.innerHTML = '00';
+    second.innerHTML = '00';
+  }
+</script>
+
+</html>
